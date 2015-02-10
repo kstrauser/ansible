@@ -111,6 +111,8 @@ class Connection(object):
                         return protocol
                 vvvv('WINRM CONNECTION ERROR: %s' % err_msg, host=self.host)
                 continue
+        if not HAVE_KERBEROS:
+            raise errors.AnsibleError("install the 'kerberos' package if trying to connect to a domain account")
         if exc:
             raise errors.AnsibleError(str(exc))
 
